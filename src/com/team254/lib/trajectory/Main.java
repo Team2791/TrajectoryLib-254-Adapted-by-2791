@@ -36,49 +36,14 @@ public class Main {
 		/*
 		 * Scopes for each Path
 		 */
+		
 		{
 			// Path name must be a valid Java class name.
 			config.dt = .02;
 			config.max_acc = 7.0;
 			config.max_jerk = 50.0;
 			config.max_vel = 10.0;
-			final String path_name = "TenFootSCurve";
-
-			// Description of this auto mode path.
-			// Remember that this is for the GO LEFT CASE!
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(2.0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(5.0, -2.0, Math.PI/4.0));
-			p.addWaypoint(new WaypointSequence.Waypoint(8.0, -4.0, 0.0));
-			p.addWaypoint(new WaypointSequence.Waypoint(10.0, -4.0, 0.0));
-
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-
-			}
-
-		}
-
-		{
-			// Path name must be a valid Java class name.
-			config.dt = .02;
-			config.max_acc = 7.0;
-			config.max_jerk = 50.0;
-			config.max_vel = 10.0;
-			final String path_name = "Test180";
+			final String path_name = "TestingOneTwo";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
@@ -110,13 +75,13 @@ public class Main {
 			config.max_acc = 7.0;
 			config.max_jerk = 50.0;
 			config.max_vel = 10.0;
-			final String path_name = "RightGear";
+			final String path_name = "BLUELeftGear";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(-3, -10.4167, -Math.PI / 3)); //right gear
+			p.addWaypoint(new WaypointSequence.Waypoint(8.5, 5.5, 13*Math.PI / 36)); //right gear, angle = 65 deg
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -141,13 +106,13 @@ public class Main {
 			config.max_acc = 7.0;
 			config.max_jerk = 50.0;
 			config.max_vel = 10.0;
-			final String path_name = "RightGearToRightHopper";
+			final String path_name = "BLUELeftGearToLeftHopper";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(-3, -10.4167, -Math.PI / 3)); //right gear
-			p.addWaypoint(new WaypointSequence.Waypoint(6.962416667, 14.9375, -Math.PI / 2)); //right hopper
+			p.addWaypoint(new WaypointSequence.Waypoint(8.5, 5.5, 23*Math.PI / 36)); //right gear, 180-65
+			p.addWaypoint(new WaypointSequence.Waypoint(10, -3.5, Math.PI / 2)); //right hopper, RANs
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -166,38 +131,9 @@ public class Main {
 			}
 
 		}
-		{
-			// Path name must be a valid Java class name.
-			config.dt = .02;
-			config.max_acc = 7.0;
-			config.max_jerk = 50.0;
-			config.max_vel = 10.0;
-			final String path_name = "RightGear";
-
-			// Description of this auto mode path.
-			// Remember that this is for the GO LEFT CASE!
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(-3, -10.4167, -Math.PI / 3)); //right gear
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
-				System.exit(1);
-			}else{
-				System.out.println("Wrote " + fullpath);
-			}
-		}
-		
-		
 		System.out.println("All Paths Reticulated");
+		System.out.println("Make sure to reflect any Path Changes in AutoPaths");
+
 	}
 
 	/*
