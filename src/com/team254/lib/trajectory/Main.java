@@ -27,10 +27,12 @@ public class Main {
 
 		TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 		config.dt = .02;
-		config.max_acc = 10; //10.0;
-		config.max_jerk = 60.0; //60.0;
-		config.max_vel = 13; //15.0;
-
+		config.max_acc = 15; 
+		config.max_jerk = 30;
+		config.max_vel = 13.5;
+		
+		final double kBLUELeftGearAngle = (13*Math.PI / 36) + (Math.PI / 720); //65.25
+		
 		final double kWheelbaseWidth = 28.0/12;
 
 		/*
@@ -39,10 +41,6 @@ public class Main {
 		
 		{
 			// Path name must be a valid Java class name.
-			config.dt = .02;
-			config.max_acc = 7.0;
-			config.max_jerk = 50.0;
-			config.max_vel = 10.0;
 			final String path_name = "TestingOneTwo";
 
 			// Description of this auto mode path.
@@ -71,17 +69,13 @@ public class Main {
 
 		{
 			// Path name must be a valid Java class name.
-			config.dt = .02;
-			config.max_acc = 7.0;
-			config.max_jerk = 50.0;
-			config.max_vel = 10.0;
 			final String path_name = "BLUELeftGear";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(8.5, 5.5, 13*Math.PI / 36)); //right gear, angle = 65 deg
+			p.addWaypoint(new WaypointSequence.Waypoint(8.6, 5.9, kBLUELeftGearAngle)); //right gear, angle = 65 deg
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -102,17 +96,13 @@ public class Main {
 		}
 		{
 			// Path name must be a valid Java class name.
-			config.dt = .02;
-			config.max_acc = 7.0;
-			config.max_jerk = 50.0;
-			config.max_vel = 10.0;
 			final String path_name = "BLUELeftGearToLeftHopper";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(8.5, 5.5, 23*Math.PI / 36)); //right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(10, -3.5, Math.PI / 2)); //right hopper, RANs
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0)); //right gear, 180-65
+			p.addWaypoint(new WaypointSequence.Waypoint(1.0, 0, 0)); //right hopper, RANs
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
