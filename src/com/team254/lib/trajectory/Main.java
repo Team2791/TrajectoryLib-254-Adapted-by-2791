@@ -27,8 +27,8 @@ public class Main {
 
 		TrajectoryGenerator.Config config = new TrajectoryGenerator.Config();
 		config.dt = .02;
-		config.max_acc = 15; 
-		config.max_jerk = 30;
+		config.max_acc = 10; 
+		config.max_jerk = 5;
 		config.max_vel = 13.5;
 		
 		final double kBLUELeftGearAngle = (13*Math.PI / 36) + (Math.PI / 720); //65.25
@@ -40,6 +40,11 @@ public class Main {
 		 */
 		
 		{
+
+			config.max_acc = 5; 
+			config.max_jerk = 5;
+			config.max_vel = 10;
+			
 			// Path name must be a valid Java class name.
 			final String path_name = "TestingOneTwo";
 
@@ -47,7 +52,7 @@ public class Main {
 			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(6, -6, -Math.PI / 4));
+			p.addWaypoint(new WaypointSequence.Waypoint(3, 3, (Math.PI/2)-.000000000001));//need to set angle just below 90 to reticulate
 
 
 			Path path = PathGenerator.makePath(p, config,
@@ -68,6 +73,10 @@ public class Main {
 		}
 
 		{
+//			config.max_vel = 10;
+//			config.max_acc = 5; 
+//			config.max_jerk = 20.0;
+			
 			// Path name must be a valid Java class name.
 			final String path_name = "BLUELeftGear";
 
@@ -75,7 +84,8 @@ public class Main {
 			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(8.6, 5.9, kBLUELeftGearAngle)); //right gear, angle = 65 deg
+			p.addWaypoint(new WaypointSequence.Waypoint(1, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(107/12.0, 54/12.0, -Math.PI/3.0));
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -121,10 +131,38 @@ public class Main {
 			}
 
 		}
+		{
+			// Path name must be a valid Java class name.
+			final String path_name = "BlueRightGearAndShot";
+
+			// Description of this auto mode path.
+			// Remember that this is for the GO LEFT CASE!
+			WaypointSequence p = new WaypointSequence(10);
+			p.addWaypoint(new WaypointSequence.Waypoint(7.5, 0, 0)); //right gear, 180-65
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 4.0, -kBLUELeftGearAngle)); //right hopper, RANs
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+
+			}
+
+		}
 		System.out.println("All Paths Reticulated");
 		System.out.println("Make sure to reflect any Path Changes in AutoPaths");
 
 	}
+	
 
 	/*
 	 * @return the path for the file that 
