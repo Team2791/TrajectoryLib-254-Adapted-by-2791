@@ -30,26 +30,23 @@ public class Main {
 		config.max_acc = 10; 
 		config.max_jerk = 5;
 		config.max_vel = 13.5;
-		
+
 		final double kBLUELeftGearAngle = (13*Math.PI / 36) + (Math.PI / 720); //65.25
-		
+
 		final double kWheelbaseWidth = 28.0/12;
 
 		/*
 		 * Scopes for each Path
 		 */
-		
-		{
 
+		{
 			config.max_acc = 5; 
 			config.max_jerk = 5;
 			config.max_vel = 10;
-			
-			// Path name must be a valid Java class name.
-			final String path_name = "TestingOneTwo";
 
-			// Description of this auto mode path.
-			// Remember that this is for the GO LEFT CASE!
+			// Working
+			final String path_name = "TestingOneTwo"; 
+
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
 			p.addWaypoint(new WaypointSequence.Waypoint(3, 3, (Math.PI/2)-.000000000001));//need to set angle just below 90 to reticulate
@@ -71,21 +68,19 @@ public class Main {
 
 			}
 		}
-
 		{
-//			config.max_vel = 10;
-//			config.max_acc = 5; 
-//			config.max_jerk = 20.0;
-			
-			// Path name must be a valid Java class name.
+			config.dt = .02;
+			config.max_acc = 6.5; 
+			config.max_jerk = 20;
+			config.max_vel = 7;
+
+			//Working
 			final String path_name = "BLUELeftGear";
 
-			// Description of this auto mode path.
-			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
 			p.addWaypoint(new WaypointSequence.Waypoint(1, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(107/12.0, 54/12.0, -Math.PI/3.0));
+			p.addWaypoint(new WaypointSequence.Waypoint(7.85, 5.7, Math.PI/3.0 + Math.PI/9));
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -96,20 +91,105 @@ public class Main {
 			//System.out.print(serialized);
 			String fullpath = joinPath(directory, path_name + ".txt");
 			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
+				System.err.println(fullpath + " could not be written!!!!1");
 				System.exit(1);
 			} else {
 				System.out.println("Wrote " + fullpath);
-
 			}
-
 		}
 		{
-			// Path name must be a valid Java class name.
-			final String path_name = "BLUELeftGearToLeftHopper";
+			config.dt = .02;
+			config.max_acc = 6.5; 
+			config.max_jerk = 20;
+			config.max_vel = 7;
+
+			//Working
+			final String path_name = "BLUELeftGearToLeftWall";
+
+			WaypointSequence p = new WaypointSequence(10);
+			
+			p.addWaypoint(new WaypointSequence.Waypoint(7.85, 5.7, Math.PI/3.0 + Math.PI/9));
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!1");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+			}
+		}
+		{
+			config.dt = .02;
+			config.max_acc = 6.5; 
+			config.max_jerk = 20;
+			config.max_vel = 7;
+
+			//Working
+			final String path_name = "BLUELeftWallToLoadingStation";
+
+			WaypointSequence p = new WaypointSequence(10);
+			
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(49.0, 1.0, Math.PI/6.0));
+			
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!1");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+			}
+		}
+		{
+			config.dt = .02;
+			config.max_acc = 6.5; 
+			config.max_jerk = 20;
+			config.max_vel = 7;
+			
+			//Working
+			final String path_name = "CenterGear";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
+			WaypointSequence p = new WaypointSequence(10);
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(8.5, 0, 0));
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!1");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+			}
+		}
+		{
+			//Not Tested
+			final String path_name = "BLUELeftGearToLeftHopper";
+
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0)); //right gear, 180-65
 			p.addWaypoint(new WaypointSequence.Waypoint(1.0, 0, 0)); //right hopper, RANs
@@ -132,11 +212,9 @@ public class Main {
 
 		}
 		{
-			// Path name must be a valid Java class name.
-			final String path_name = "BlueRightGearAndShot";
+			//Not Tested
+			final String path_name = "BLUEBoilerToRightGear";
 
-			// Description of this auto mode path.
-			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(7.5, 0, 0)); //right gear, 180-65
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 4.0, -kBLUELeftGearAngle)); //right hopper, RANs
@@ -162,7 +240,7 @@ public class Main {
 		System.out.println("Make sure to reflect any Path Changes in AutoPaths");
 
 	}
-	
+
 
 	/*
 	 * @return the path for the file that 

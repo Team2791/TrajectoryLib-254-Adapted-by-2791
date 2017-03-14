@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-FILENAME = "C:\\Users\\team2791\\code\\TrajectoryCheese\\paths\\CenterLanePathFar.txt"
+FILENAME = "C:\\Users\\team2791\\code\\TrajectoryLib\\paths\\BLUECenterGear.txt"
 
 
 def main():
