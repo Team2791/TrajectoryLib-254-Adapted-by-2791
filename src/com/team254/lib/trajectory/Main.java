@@ -1,7 +1,7 @@
 package com.team254.lib.trajectory;
 
-
 import com.team254.lib.trajectory.io.TextFileSerializer;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -39,12 +39,12 @@ public class Main {
 		 * Scopes for each Path
 		 */
 
+		//********Scope Is Tested********
 		{
 			config.max_acc = 5; 
 			config.max_jerk = 5;
 			config.max_vel = 10;
 
-			// Working
 			final String path_name = "TestingOneTwo"; 
 
 			WaypointSequence p = new WaypointSequence(10);
@@ -68,13 +68,14 @@ public class Main {
 
 			}
 		}
+
+		//********Scope Is Tested********
 		{
 			config.dt = .02;
 			config.max_acc = 6.5; 
 			config.max_jerk = 20;
 			config.max_vel = 7;
 
-			//Working
 			final String path_name = "BLUELeftGear";
 
 			WaypointSequence p = new WaypointSequence(10);
@@ -97,17 +98,18 @@ public class Main {
 				System.out.println("Wrote " + fullpath);
 			}
 		}
+
+		//********Scope Is Tested********
 		{
 			config.dt = .02;
 			config.max_acc = 6.5; 
 			config.max_jerk = 20;
 			config.max_vel = 7;
 
-			//Working
 			final String path_name = "BLUELeftGearToLeftWall";
 
 			WaypointSequence p = new WaypointSequence(10);
-			
+
 			p.addWaypoint(new WaypointSequence.Waypoint(7.85, 5.7, Math.PI/3.0 + Math.PI/9));
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
 
@@ -126,20 +128,22 @@ public class Main {
 				System.out.println("Wrote " + fullpath);
 			}
 		}
+
+		//********Scope Is Tested********
 		{
 			config.dt = .02;
-			config.max_acc = 6.5; 
+			config.max_acc = 9; 
 			config.max_jerk = 20;
-			config.max_vel = 7;
+			config.max_vel = 12;
 
 			//Working
 			final String path_name = "BLUELeftWallToLoadingStation";
 
 			WaypointSequence p = new WaypointSequence(10);
-			
+
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
 			p.addWaypoint(new WaypointSequence.Waypoint(49.0, 1.0, Math.PI/6.0));
-			
+
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -156,13 +160,14 @@ public class Main {
 				System.out.println("Wrote " + fullpath);
 			}
 		}
+
+		//********Scope Is Tested********
 		{
 			config.dt = .02;
 			config.max_acc = 6.5; 
 			config.max_jerk = 20;
 			config.max_vel = 7;
-			
-			//Working
+
 			final String path_name = "CenterGear";
 
 			// Description of this auto mode path.
@@ -186,14 +191,16 @@ public class Main {
 				System.out.println("Wrote " + fullpath);
 			}
 		}
+
+		//********Scope Is UnTested********
 		{
-			//Not Tested
 			final String path_name = "BLUELeftGearToLeftHopper";
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0)); //right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(1.0, 0, 0)); //right hopper, RANs
-
+			p.addWaypoint(new WaypointSequence.Waypoint(3.0, 0, Math.PI/6)); 
+			p.addWaypoint(new WaypointSequence.Waypoint(90/12.0, 56/12.0, 2*Math.PI/3 - .00001)); 
+			
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
 
@@ -211,13 +218,14 @@ public class Main {
 			}
 
 		}
+
+		//********Scope Is UnTested********
 		{
-			//Not Tested
 			final String path_name = "BLUEBoilerToRightGear";
 
 			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(7.5, 0, 0)); //right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(0, 4.0, -kBLUELeftGearAngle)); //right hopper, RANs
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0)); //right gear, 180-65
+			p.addWaypoint(new WaypointSequence.Waypoint(118/12.0, 0, Math.PI / 9)); 
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -234,15 +242,43 @@ public class Main {
 				System.out.println("Wrote " + fullpath);
 
 			}
-
 		}
+		
+		//********Scope Is UnTested********
+		{
+			final String path_name = "BLUERightGearToRightHopper";
+
+			WaypointSequence p = new WaypointSequence(10);
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0)); //right gear, 180-65
+			p.addWaypoint(new WaypointSequence.Waypoint(1.0, 0, Math.PI/6)); //right hopper, RANs
+			p.addWaypoint(new WaypointSequence.Waypoint(120/12,  22/12, Math.PI/6 + Math.PI/2 - 0.00001)); //right hopper, RANs
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+
+			}
+		}
+
 		System.out.println("All Paths Reticulated");
 		System.out.println("Make sure to reflect any Path Changes in AutoPaths");
 
 	}
 
 
-	/*
+	/**
+	 * @param path1 the relative location of the path file
+	 * @param path2 the path file name
 	 * @return the path for the file that 
 	 */
 	public static String joinPath(String path1, String path2)
