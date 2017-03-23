@@ -19,6 +19,15 @@ public class WaypointSequence {
       this.theta = theta;
     }
     
+    /**
+     * @param pos pos[0] = x; pos[1] = y; pos[2] = theta
+     */
+    public Waypoint(double pos[]) {
+        this.x = pos[0];
+        this.y = pos[1];
+        this.theta = pos[2];
+      }
+    
     public Waypoint(Waypoint tocopy) {
       this.x = tocopy.x;
       this.y = tocopy.y;
