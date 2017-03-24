@@ -3,6 +3,7 @@ package com.team254.lib.util;
 /**
  * A Constants class with all positions that are needed for the trajectories. 
  * All positions have 3 values, x, y, theta
+ * TODO: find a way to automatically subtract kRobotLength
  * @author team2791
  */
 public class Positions {
