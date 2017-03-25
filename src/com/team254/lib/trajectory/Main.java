@@ -44,16 +44,17 @@ public class Main {
 
 		//********Scope Is Tested********
 		{
-			config.max_acc = 5; 
-			config.max_jerk = 5;
-			config.max_vel = 10;
+			config.dt = .02;//0.02
+			config.max_acc = 5; //6.5
+			config.max_jerk = 15;//20
+			config.max_vel = 10;//7
 
 			final String path_name = "TestingOneTwo"; 
 
 			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, Math.PI/3));//right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(1, 1, Math.PI/3));//right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(4, -10, 0)); 
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(5,0,0));
+//			p.addWaypoint(new WaypointSequence.Waypoint(4, -10, 0)); 
 
 
 			Path path = PathGenerator.makePath(p, config,
