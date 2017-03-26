@@ -34,10 +34,8 @@ public class Main {
 		config.max_jerk = 5;
 		config.max_vel = 13.5;
 
-		final double kBLUELeftGearAngle = (13*Math.PI / 36) + (Math.PI / 720); //65.25
-
 		final double kWheelbaseWidth = 28.0/12;
-		final double kRobotLength = 36/12;
+		
 		/*
 		 * Scopes for each Path
 		 */
@@ -202,7 +200,7 @@ public class Main {
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(2, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kMidfield));//right gear, 180-65
+			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kMidfield));
 
 			//			p.invertY();
 
