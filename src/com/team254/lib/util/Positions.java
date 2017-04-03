@@ -10,12 +10,16 @@ public class Positions {
 
 	public final static double kWheelbaseWidth = 28.0/12;
 	public final static double kRobotLength = 36/12;
+	public final static double EPSILON = 0.00001;
+
 	
-	public final static double kLoadingStationGear[] = {125/12 - kRobotLength, 81/12 - kRobotLength, Math.PI/3};
-	public final static double kCenterGear[] = {100/12 - kRobotLength, 0, 0};
-	public final static double kBoilerGear[] = {125/12 - kRobotLength, 81.75/12 - kRobotLength, Math.PI/3};
+	public final static double kLoadingStationGear[] = {125/12 - kRobotLength, 66.383, Math.PI/3};
+	public final static double kCenterGear[] = {101/12 - kRobotLength, 0, 0};
+	public final static double kBoilerGear[] = {125/12 - kRobotLength, 66.9/12, Math.PI/3};
 	
-	public final static double kBoilerWall[] = {18.6/12, 19.3/12 , Math.PI/3};//facing boiler to 0 degrees
+	public final static double kBoilerWall[] = {18.6/12, 19.3/12 , Math.PI/3};//facing boiler
+	public final static double kCenterGearShootingPosition[] = {-40/12 - kRobotLength, -13/12, Math.PI/2 - EPSILON};
+
 	
 	public final static double kMidfield[] ={325/12 - kRobotLength, 0, 0};
 	

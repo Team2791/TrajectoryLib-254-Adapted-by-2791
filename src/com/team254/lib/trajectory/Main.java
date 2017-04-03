@@ -172,7 +172,7 @@ public class Main {
 			config.max_jerk = 20;
 			config.max_vel = 7;
 
-			final String path_name = "CloseShotToBoilerGear";
+			final String path_name = "CloseShotToGear";
 
 			// Description of this auto mode path.
 			// Remember that this is for the GO LEFT CASE!
@@ -197,13 +197,13 @@ public class Main {
 			}
 		}
 		{
-			final String path_name = "GearToMidFieldPart2";
+			final String path_name = "CenterShotToGear";
 
 			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(2, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kCenterGearShootingPosition));
 			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kMidfield));
 
-			//			p.invertY();
+						p.invertY();
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -221,101 +221,6 @@ public class Main {
 
 			}
 
-		}
-		{
-			final String path_name = "GearToMidFieldPart1";
-
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kLoadingStationGear));
-			p.addWaypoint(new WaypointSequence.Waypoint(2, 0, 0));
-			//			p.invertY();
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-
-			}
-
-		}
-		//********Scope Is UnTested********
-		{
-			final String path_name = "GearToHopper";
-
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kBoilerGear)); //right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kFarHopper)); 
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-
-			}
-		}
-		{
-			final String path_name = "FarHopper";
-
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(0,0,0)); //right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kFarHopper)); 
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-
-			}
-		}
-		{
-			final String path_name = "FarHopperNoTrigger";
-
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(0,0,0)); //right gear, 180-65
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kFarHopperMiddleOrigin)); 
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-
-			}
 		}
 
 		System.out.println("All Paths Reticulated");
