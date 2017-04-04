@@ -51,8 +51,37 @@ public class Main {
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(5,0,0));
+			p.addWaypoint(new WaypointSequence.Waypoint(5,3,Math.PI/2-.000001));
 //			p.addWaypoint(new WaypointSequence.Waypoint(4, -10, 0)); 
+
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+
+			}
+		}
+		{
+			config.dt = .02;//0.02
+			config.max_acc = 6.5; //6.5
+			config.max_jerk = 20;//20
+			config.max_vel = 4;//7
+
+			final String path_name = "RedLoadingAutoJack"; 
+
+			WaypointSequence p = new WaypointSequence(10);
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(125/12-3,81/12-3,Math.PI/3 - .0001));
 
 
 			Path path = PathGenerator.makePath(p, config,
