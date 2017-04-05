@@ -43,17 +43,17 @@ public class Main {
 		//********Scope Is Tested********
 		{
 			config.dt = .02;//0.02
-			config.max_acc = 5; //6.5
-			config.max_jerk = 15;//20
-			config.max_vel = 10;//7
+			config.max_acc = 6; //6.5 //5
+			config.max_jerk = 6;//20 //15
+			config.max_vel = 4;//7 //10
 
 			final String path_name = "TestingOneTwo"; 
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(5,0,0));
-//			p.addWaypoint(new WaypointSequence.Waypoint(4, -10, 0)); 
-
+			p.addWaypoint(new WaypointSequence.Waypoint(2.5,4,Math.PI/2-.0001));
+			p.addWaypoint(new WaypointSequence.Waypoint(2.5,7,Math.PI/2-.0001));
+			
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);

@@ -13,7 +13,7 @@ public class Positions {
 	public final static double EPSILON = 0.00001;
 
 	
-	public final static double kLoadingStationGear[] = {125/12 - kRobotLength, 66.383, Math.PI/3};
+	public final static double kLoadingStationGear[] = {125/12 - kRobotLength, 66.383/12, Math.PI/3};
 	public final static double kCenterGear[] = {101/12 - kRobotLength, 0, 0};
 	public final static double kBoilerGear[] = {125/12 - kRobotLength, 66.9/12, Math.PI/3};
 	
