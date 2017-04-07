@@ -168,7 +168,7 @@ public class Main {
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 88*Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 88 *Math.PI/180 + 0.00001));
 			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 88*Math.PI/180 + 0.00001));
 
 			Path path = PathGenerator.makePath(p, config,
