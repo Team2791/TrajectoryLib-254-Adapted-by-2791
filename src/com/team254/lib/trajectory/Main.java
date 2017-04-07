@@ -17,7 +17,7 @@ public class Main {
 
 	/**
 	 * the main method where the Waypoints are sent to paths which are serialized to a file
-	 * All Paths are designed for the Blue Side, going forward,
+	 * All Paths are designed for the RED Side, going forward,
 	 * As of now (3/22) these paths are based on the Field Inventor CAD
 	 * Also, if you want a negative angle, make the path with a positive angle and invert the sequence
 	 */
@@ -35,7 +35,7 @@ public class Main {
 		config.max_vel = 13.5;
 
 		final double kWheelbaseWidth = 28.0/12;
-		
+
 		/*
 		 * Scopes for each Path
 		 */
@@ -53,7 +53,7 @@ public class Main {
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
 			p.addWaypoint(new WaypointSequence.Waypoint(2.5,4,Math.PI/2-.0001));
 			p.addWaypoint(new WaypointSequence.Waypoint(2.5,7,Math.PI/2-.0001));
-			
+
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -72,6 +72,7 @@ public class Main {
 			}
 		}
 
+
 		//********Scope Is Tested********
 		{
 			config.dt = .02;
@@ -79,12 +80,14 @@ public class Main {
 			config.max_jerk = 20;
 			config.max_vel = 7;
 
-			final String path_name = "LoadingStationGear";
+			final String path_name = "RED_BoilerWallToBoilerGear";
 
-
+			// Description of this auto mode path.
+			// Remember that this is for the GO LEFT CASE!
 			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kLoadingStationGear));
+			p.addWaypoint(new WaypointSequence.Waypoint(0,0,0));
+			p.addWaypoint(new WaypointSequence.Waypoint(68/12.0,38/12.0,0));
+			p.addWaypoint(new WaypointSequence.Waypoint(110/12.0,38/12.0,0));
 			p.invertY();
 
 			Path path = PathGenerator.makePath(p, config,
@@ -102,108 +105,15 @@ public class Main {
 				System.out.println("Wrote " + fullpath);
 			}
 		}
-
-		//********Scope Is Tested********
 		{
-			config.dt = .02;
-			config.max_acc = 6.5; 
-			config.max_jerk = 20;
-			config.max_vel = 7;
-
-			final String path_name = "CenterGear";
+			final String path_name = "RED_CenterShotToCenterGear";
 
 			WaypointSequence p = new WaypointSequence(10);
-
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kCenterGear));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 88*Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 88*Math.PI/180 + 0.00001));
 
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!1");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-			}
-		}
-
-		//********Scope Is Tested********
-		{
-			config.dt = .02;
-			config.max_acc = 9; 
-			config.max_jerk = 20;
-			config.max_vel = 12;
-
-			//Working
-			final String path_name = "BoilerGear";
-
-			WaypointSequence p = new WaypointSequence(10);
-
-			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kBoilerGear));
-
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!1");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-			}
-		}
-
-		//********Scope Is Tested********
-		{
-			config.dt = .02;
-			config.max_acc = 6.5; 
-			config.max_jerk = 20;
-			config.max_vel = 7;
-
-			final String path_name = "CloseShotToGear";
-
-			// Description of this auto mode path.
-			// Remember that this is for the GO LEFT CASE!
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kBoilerWall));
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kBoilerGear));
-			//			p.invertY();
-
-			Path path = PathGenerator.makePath(p, config,
-					kWheelbaseWidth, path_name);
-
-			// Outputs to the directory supplied as the first argument.
-			TextFileSerializer js = new TextFileSerializer();
-			String serialized = js.serialize(path);
-			//System.out.print(serialized);
-			String fullpath = joinPath(directory, path_name + ".txt");
-			if (!writeFile(fullpath, serialized)) {
-				System.err.println(fullpath + " could not be written!!!!1");
-				System.exit(1);
-			} else {
-				System.out.println("Wrote " + fullpath);
-			}
-		}
-		{
-			final String path_name = "CenterShotToGear";
-
-			WaypointSequence p = new WaypointSequence(10);
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kCenterGearShootingPosition));
-			p.addWaypoint(new WaypointSequence.Waypoint(Positions.kMidfield));
-
-						p.invertY();
+			p.invertY();
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -222,7 +132,61 @@ public class Main {
 			}
 
 		}
+		//***************************************************************
+		{
+			config.dt = .02;
+			config.max_acc = 6.5; 
+			config.max_jerk = 20;
+			config.max_vel = 7;
 
+			final String path_name = "BLUE_BoilerWallToBoilerGear";
+
+			// Description of this auto mode path.
+			// Remember that this is for the GO LEFT CASE!
+			WaypointSequence p = new WaypointSequence(10);
+			p.addWaypoint(new WaypointSequence.Waypoint(0,0,0));
+			p.addWaypoint(new WaypointSequence.Waypoint(68/12.0,38/12.0,0));
+			p.addWaypoint(new WaypointSequence.Waypoint(110/12.0,38/12.0,0));
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!1");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+			}
+		}
+		{
+			final String path_name = "BLUE_CenterShotToCenterGear";
+
+			WaypointSequence p = new WaypointSequence(10);
+			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 88*Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 88*Math.PI/180 + 0.00001));
+
+			Path path = PathGenerator.makePath(p, config,
+					kWheelbaseWidth, path_name);
+
+			// Outputs to the directory supplied as the first argument.
+			TextFileSerializer js = new TextFileSerializer();
+			String serialized = js.serialize(path);
+			//System.out.print(serialized);
+			String fullpath = joinPath(directory, path_name + ".txt");
+			if (!writeFile(fullpath, serialized)) {
+				System.err.println(fullpath + " could not be written!!!!");
+				System.exit(1);
+			} else {
+				System.out.println("Wrote " + fullpath);
+
+			}
+		}
 		System.out.println("All Paths Reticulated");
 		System.out.println("Make sure to reflect any Path Changes in AutoPaths");
 
