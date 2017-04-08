@@ -73,7 +73,7 @@ public class Main {
 		}
 
 
-		//********Scope Is Tested********
+		//**********************REDREDREDREDRED**********************************
 		{
 			config.dt = .02;
 			config.max_acc = 6.5; 
@@ -110,8 +110,8 @@ public class Main {
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 88*Math.PI/180 + 0.00001));
-			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 88*Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 86.5*Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 86.5*Math.PI/180 + 0.00001));
 
 			p.invertY();
 
@@ -132,7 +132,7 @@ public class Main {
 			}
 
 		}
-		//***************************************************************
+		//**********************BLUEBLUEBLUEBLUE**********************************
 		{
 			config.dt = .02;
 			config.max_acc = 6.5; 
@@ -168,8 +168,8 @@ public class Main {
 
 			WaypointSequence p = new WaypointSequence(10);
 			p.addWaypoint(new WaypointSequence.Waypoint(0, 0, 0));
-			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 88 *Math.PI/180 + 0.00001));
-			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 88*Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 89.5 *Math.PI/180 + 0.00001));
+			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,70/12.0, 89.5*Math.PI/180 + 0.00001));
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
