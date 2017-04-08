@@ -113,7 +113,7 @@ public class Main {
 			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 86.5*Math.PI/180 + 0.00001));
 			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,66/12.0, 86.5*Math.PI/180 + 0.00001));
 
-			p.invertY();
+//			p.invertY();
 
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
@@ -171,6 +171,8 @@ public class Main {
 			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,32/12.0, 89.5 *Math.PI/180 + 0.00001));
 			p.addWaypoint(new WaypointSequence.Waypoint(32/12.0,70/12.0, 89.5*Math.PI/180 + 0.00001));
 
+			p.invertY();
+			
 			Path path = PathGenerator.makePath(p, config,
 					kWheelbaseWidth, path_name);
 
